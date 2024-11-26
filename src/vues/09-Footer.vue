@@ -35,14 +35,14 @@ const scrollToTop = () => {
             <div class="contacts-right">
               <div class="contacts-location contacts-item">
                 <img
-                    src="@/assets/icons/contacts/Location.svg"
+                    src="../assets/icons/contacts/Location.svg"
                     width="24" height="24"
                     loading="lazy" />
                 <p class="location">Нячанг</p>
               </div>
               <div class="contacts-location contacts-item">
                 <img
-                    src="@/assets/icons/contacts/Time.svg"
+                    src="../assets/icons/contacts/Time.svg"
                     width="24" height="24"
                     loading="lazy" />
                 <p class="location">Вс-выходной</p>
@@ -53,11 +53,11 @@ const scrollToTop = () => {
 
           <div class="footer-logo-container">
             <a
-                href="/"
+                href="/public"
                 class="footer-logo">
               <img
                 class="footer-logo"
-                src="@/assets/icons/logoSVG.svg"
+                src="../assets/icons/logoSVG.svg"
                 alt="Bear ride on ATV"
                 loading="lazy"
               />

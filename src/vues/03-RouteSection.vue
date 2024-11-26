@@ -13,14 +13,14 @@
     </div>
     <div class="map-container-tablet">
       <img 
-      src="@/assets/images/map-tablet.png" 
+      src="../assets/images/map-tablet.png"
       alt="" 
       width="" height="" loading="lazy"
       />
     </div>
     <div class="map-container-mobile">
       <img
-      src="@/assets/images/map-mobile.png"
+      src="../assets/images/map-mobile.png"
       alt="mobile route map"
       width="414" height="auto" loading="lazy"
       />
@@ -28,44 +28,44 @@
     <div class="map-container">
       <!-- Круглые изображения с вложенными всплывающими окнами -->
       <div class="circle-container circle-image-1">
-        <img src="@/assets/images/route/6.png" class="circle-image">
+        <img src="../assets/images/route/6.png" class="circle-image">
         <div class="hover-popup hover-popup-1">
-          <img src="@/assets/images/route/6-6.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/6-6.png" alt="Увеличенное фото">
         </div>
       </div>
 
       <div class="circle-container circle-image-2">
-        <img src="@/assets/images/route/5.png" class="circle-image">
+        <img src="../assets/images/route/5.png" class="circle-image">
         <div class="hover-popup hover-popup-2">
-          <img src="@/assets/images/route/5-5.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/5-5.png" alt="Увеличенное фото">
         </div>
       </div>
 
       <div class="circle-container circle-image-3">
-        <img src="@/assets/images/route/2.png" class="circle-image">
+        <img src="../assets/images/route/2.png" class="circle-image">
         <div class="hover-popup hover-popup-3">
-          <img src="@/assets/images/route/2-2.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/2-2.png" alt="Увеличенное фото">
         </div>
       </div>
 
       <div class="circle-container circle-image-4">
-        <img src="@/assets/images/route/1.png" class="circle-image">
+        <img src="../assets/images/route/1.png" class="circle-image">
         <div class="hover-popup hover-popup-4">
-          <img src="@/assets/images/route/1-1.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/1-1.png" alt="Увеличенное фото">
         </div>
       </div>
 
       <div class="circle-container circle-image-5">
-        <img src="@/assets/images/route/3.png" class="circle-image">
+        <img src="../assets/images/route/3.png" class="circle-image">
         <div class="hover-popup hover-popup-5">
-          <img src="@/assets/images/route/3-3.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/3-3.png" alt="Увеличенное фото">
         </div>
       </div>
 
       <div class="circle-container circle-image-6">
-        <img src="@/assets/images/route/4.png" class="circle-image">
+        <img src="../assets/images/route/4.png" class="circle-image">
         <div class="hover-popup hover-popup-6">
-          <img src="@/assets/images/route/4-4.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/4-4.png" alt="Увеличенное фото">
         </div>
       </div>
     </div>

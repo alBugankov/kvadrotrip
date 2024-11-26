@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import HeaderSection from '@/components/new/01-HeaderSection.vue';
-import AboutSection from '@/components/new/02-AboutSection.vue';
-import RouteSection from '@/components/new/03-RouteSection.vue';
-import GallerySection from '@/components/new/04-GallerySection.vue';
-import TariffsSection from '@/components/new/05-TariffsSection.vue';
-import FaqSection from '@/components/new/06-FaqSection.vue';
-import ReviewSection from '@/components/new/07-ReviewSection.vue';
-import FormSection from '@/components/new/08-FormSection.vue';
-import Footer from '@/components/new/09-Footer.vue';
-import NotFound from '@/components/new/NotFound.vue';
+import HeaderSection from '@/vues/01-HeaderSection.vue';
+import AboutSection from '@/vues/02-AboutSection.vue';
+import RouteSection from '@/vues/03-RouteSection.vue';
+import GallerySection from '@/vues/04-GallerySection.vue';
+import TariffsSection from '@/vues/05-TariffsSection.vue';
+import FaqSection from '@/vues/06-FaqSection.vue';
+import ReviewSection from '@/vues/07-ReviewSection.vue';
+import FormSection from '@/vues/08-FormSection.vue';
+import Footer from '@/vues/09-Footer.vue';
+import NotFound from '@/vues/NotFound.vue';
 
 import { ref, onMounted, onUnmounted, provide } from 'vue';
 
@@ -72,14 +72,14 @@ provide('windowWidth', windowWidth);
 <template>
   <div class="app">
     <main class="main">
-      <HeaderSection />
-      <AboutSection id="about" />
-      <RouteSection id="route" />
-      <GallerySection id="gallery" />
-      <TariffsSection id="tariffs" />
-      <FaqSection id="faq" />
-      <ReviewSection id="reviews" />
-      <FormSection id="order"/>
+      <header-section />
+      <about-section id="about" />
+      <route-section id="route" />
+      <gallery-section id="gallery" />
+      <tariffs-section id="tariffs" />
+      <faq-section id="faq" />
+      <review-section id="reviews" />
+      <form-section id="order"/>
     </main>
     <Footer id="contacts" />
   </div>

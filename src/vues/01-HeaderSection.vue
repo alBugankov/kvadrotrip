@@ -126,10 +126,10 @@ onUnmounted(() => {
             </ul>
           </div>
           <div class="header-menu-logo">
-            <a href="/" class="header-logo" :style="avatarStyle">
+            <a href="/public" class="header-logo" :style="avatarStyle">
               <img
                   class="header-logo"
-                  src="@/assets/icons/logoSVG.svg"
+                  src="../assets/icons/logoSVG.svg"
                   alt="Bear ride on ATV"
                   loading="lazy"
               />

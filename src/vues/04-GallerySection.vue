@@ -133,14 +133,14 @@ const onTouchEnd = (event) => {
             <div class="button-container">
               <img
                   class="left-button"
-                  src="@/assets/icons/gallery-buttons/left-button.svg"
+                  src="../assets/icons/gallery-buttons/left-button.svg"
                   alt=""
                   width="85" height="33" loading="lazy"
                   @click="goToLeft"
               />
               <img
                   class="right-button"
-                  src="@/assets/icons/gallery-buttons/right-button.svg"
+                  src="../assets/icons/gallery-buttons/right-button.svg"
                   alt=""
                   width="85" height="33" loading="lazy"
                   @click="goToRight"

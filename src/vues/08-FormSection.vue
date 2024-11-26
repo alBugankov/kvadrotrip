@@ -437,7 +437,7 @@ onUnmounted(() => {
             <p class="copyright-text">
               *Нажимая на кнопку, вы соглашаетесь на обработку персональных данных в соответствии <br/>
               с <a href="/docs/privace.pdf" target="_blank"
-               class="white-link">Политикой конфиденцальности</a>
+                   class="white-link">Политикой конфиденцальности</a>
             </p>
           </div>
           <div class="form-element button-container">
