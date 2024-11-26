@@ -316,13 +316,13 @@ a {
 }
 
 .el-date-table {
-    font-family: var(--roboto-light);
+    font-family: var(--roboto-light), sans-serif;
     color: var(--color-light);
     font-size: 14px;
 }
 
 .el-date-picker__header-label {
-    font-family: var(--roboto-light);
+    font-family: var(--roboto-light), sans-serif;
     color: var(--color-light);
     font-size: 16px;
     line-height: 45px;
@@ -386,7 +386,7 @@ section:nth-of-type(n):not(:nth-of-type(1)),
 }
 
 .section-title {
-    font-family: var(--erbaum-regular);
+    font-family: var(--erbaum-regular), sans-serif;
     font-size: 50px; /*0.9vw 50px*/
     text-transform: uppercase;
     color: var(--color-light);
@@ -405,7 +405,7 @@ section:nth-of-type(n):not(:nth-of-type(1)),
 .section-name {
     display: flex;
     flex-direction: row-reverse;
-    font-family: var(--raleway-regular);
+    font-family: var(--raleway-regular), sans-serif;
     font-size: 22px; /*1.15vw 22px*/
     color: var(--color-light-title);
     text-transform: uppercase;
@@ -420,7 +420,7 @@ section:nth-of-type(n):not(:nth-of-type(1)),
     color: var(--color-light);
     padding-inline: 50px; /*2.60vw*/
     padding-block: 18px; /*0.94vw*/
-    font-family: var(--raleway-semibold);
+    font-family: var(--raleway-semibold), sans-serif;
     font-weight: 600;
     font-size: 18px; /*0.83vw*/
     border: none;
@@ -446,7 +446,7 @@ section:nth-of-type(n):not(:nth-of-type(1)),
     background-color: var(--color-background-accent);
     border-radius: var(--input-radius);
     border: none;
-    font-family: var(--roboto-light);
+    font-family: var(--roboto-light), sans-serif;
     color: var(--color-light);
     font-size: 16px;
     padding-inline: 16px;
@@ -459,9 +459,8 @@ section:nth-of-type(n):not(:nth-of-type(1)),
 
 .input::placeholder {
     color: var(--color-medium);
-    font-family: var(--roboto-light);
+    font-family: var(--roboto-light), sans-serif;
     font-size: 16px;
-    padding-block: 20px;
 }
 
 /*Класс для скрытия чего-либо визуально*/
@@ -555,6 +554,7 @@ section:nth-of-type(n):not(:nth-of-type(1)),
     .button,
     .counter-body button,
     .custom-checkbox,
+    .item-question,
     a {
         -webkit-tap-highlight-color: transparent;
         outline: none;

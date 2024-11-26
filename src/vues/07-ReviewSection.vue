@@ -59,7 +59,7 @@ onMounted(() => {
   justify-content: center;
 }
 
-::v-deep a[href*="elfsight.com/google-reviews-widget"] {
+::v-deep(a[href*="elfsight.com/google-reviews-widget"]) {
   display: none !important;
 }
 
@@ -73,7 +73,7 @@ onMounted(() => {
   .review-container {
     border-radius: var(--element-radius-mobile);
   }
-  ::v-deep .dIKKtD {
+  ::v-deep(.dIKKtD) {
     margin-inline: 5px;
   }
 }

@@ -28,44 +28,44 @@
     <div class="map-container">
       <!-- Круглые изображения с вложенными всплывающими окнами -->
       <div class="circle-container circle-image-1">
-        <img src="../assets/images/route/6.png" class="circle-image">
+        <img src="../assets/images/route/6.png" class="circle-image" alt="Фото дамбы">
         <div class="hover-popup hover-popup-1">
-          <img src="../assets/images/route/6-6.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/6-6.png" alt="Квадроцикл на дамбе" >
         </div>
       </div>
 
       <div class="circle-container circle-image-2">
-        <img src="../assets/images/route/5.png" class="circle-image">
+        <img src="../assets/images/route/5.png" class="circle-image" alt="Фото озера">
         <div class="hover-popup hover-popup-2">
-          <img src="../assets/images/route/5-5.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/5-5.png" alt="Квадроцикл едет по дну озера">
         </div>
       </div>
 
       <div class="circle-container circle-image-3">
-        <img src="../assets/images/route/2.png" class="circle-image">
+        <img src="../assets/images/route/2.png" class="circle-image" alt="Фотография манго">
         <div class="hover-popup hover-popup-3">
-          <img src="../assets/images/route/2-2.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/2-2.png" alt="Квадроцикл едет мимо плантаций манго">
         </div>
       </div>
 
       <div class="circle-container circle-image-4">
-        <img src="../assets/images/route/1.png" class="circle-image">
+        <img src="../assets/images/route/1.png" class="circle-image" alt="Фотография эвкалиптового леса">
         <div class="hover-popup hover-popup-4">
-          <img src="../assets/images/route/1-1.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/1-1.png" alt="Квадроцикл едет через эвкалиптовый лес">
         </div>
       </div>
 
       <div class="circle-container circle-image-5">
-        <img src="../assets/images/route/3.png" class="circle-image">
+        <img src="../assets/images/route/3.png" class="circle-image" alt="Фотография горной реки">
         <div class="hover-popup hover-popup-5">
-          <img src="../assets/images/route/3-3.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/3-3.png" alt="Группа квадроциклов преодолевает реку">
         </div>
       </div>
 
       <div class="circle-container circle-image-6">
-        <img src="../assets/images/route/4.png" class="circle-image">
+        <img src="../assets/images/route/4.png" class="circle-image" alt="Серпантин с красивыми видами">
         <div class="hover-popup hover-popup-6">
-          <img src="../assets/images/route/4-4.png" alt="Увеличенное фото">
+          <img src="../assets/images/route/4-4.png" alt="Серпантин с красивыми видами">
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@
   color: var(--color-light);
   text-align: center;
   font-size: 18px;
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   white-space: pre-line;
   min-width: 180px;

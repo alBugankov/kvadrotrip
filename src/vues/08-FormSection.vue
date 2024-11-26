@@ -2,9 +2,10 @@
 import { ref, onMounted, onUnmounted, nextTick, inject } from 'vue';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import intlTelInput from 'intl-tel-input';
+import type { Ref } from 'vue';
 
 
-const windowWidth = inject('windowWidth'); // Инжектируем из App.vue
+const windowWidth = inject('windowWidth',ref(0)) as Ref<number>;
 const counter = ref(1);
 const username = ref('');
 const email = ref('');
@@ -16,7 +17,7 @@ const isLoading = ref(false);
 const dialogVisible = ref(false);
 const dialogTitle = ref('');
 const dialogSubtitle = ref('');
-const titleStyle = ref('');
+const titleStyle = ref<{ color: string }>({ color: '' });
 const errors = ref({
   username: '',
   email: '',
@@ -45,7 +46,9 @@ const resetForm = () => {
   datePick.value = '';
   hasChildrenUnder16.value = false;
   additionalNotes.value = '';
-  iti.value.setCountry('');
+  if (iti.value) {
+    iti.value.setCountry('');
+  }
 }
 
 // Функции для увеличения и уменьшения счётчика
@@ -53,7 +56,7 @@ const counterPlus = () => { counter.value++; };
 const counterMinus = () => { counter.value--; };
 
 // Функция для отключения воскресений в календаре
-const disabledDate = (date) => date.getDay() === 0;
+const disabledDate = (date: Date) => date.getDay() === 0;
 
 // Функция для добавления "+" при фокусе на поле, если его ещё нет
 const addPlusSign = () => {
@@ -72,12 +75,14 @@ const enforcePlusSign = () => {
 const removePlusIfEmpty = () => {
   if (phoneNumber.value === '+') {
     phoneNumber.value = '';
-    iti.value.setCountry('');
+    if (iti.value) {
+      iti.value.setCountry('');
+    }
   }
 };
 
 // Функция для проверки значений
-const validateForm = (event) => {
+const validateForm = () => {
 
   errors.value.username = '';
   errors.value.email = '';
@@ -107,7 +112,7 @@ const validateForm = (event) => {
   // Валидация номера телефона
   if (!phoneNumber.value) {
     errors.value.phoneNumber = 'Пожалуйста, введите номер в международном формате!';
-  } else if (!iti.value.isValidNumber()) {
+  } else if (iti.value && !iti.value.isValidNumber()) {
     // Проверка на валидность номера
     errors.value.phoneNumber = 'Введите корректный номер телефона!';
   } else {
@@ -211,42 +216,38 @@ const submitForm = () => {
 };
 
 
-let tooltip = ref(null);
-let timer;
+const tooltip = ref<HTMLElement | null>(null)
+let timer: number;
 const timeout = 700;
-const iti = ref({})
+const iti = ref<ReturnType<typeof intlTelInput> | null>(null);
 
-const showTooltip = (e) => {
-
+const showTooltip = (e: MouseEvent) => {
   clearTimeout(timer); // Очищаем существующий таймер
 
-  const currentInput = e.target; // текущий инпут
+  const currentInput = e.target as HTMLInputElement | null;
 
-  const refValue = currentInput.getAttribute('data-ref'); // получаем значение data-ref
+  if (currentInput) {
+    const refValue = currentInput.getAttribute('data-ref'); // получаем значение data-ref
 
+    tooltip.value = document.querySelector(`[data-tooltip="${refValue}"]`) as HTMLElement | null; // Находим элемент с data-tooltip, равным полученному data-ref
 
-  const tooltipElement = document.querySelector(`[data-tooltip="${refValue}"]`); // Находим элемент с data-tooltip, равным полученному data-ref
-
-  // Устанавливаем tooltip.value в найденный элемент, если он существует
-  tooltip.value = tooltipElement;
-
-
-  // Устанавливаем позицию подсказки сразу
-  if (tooltip.value) {
-    tooltip.value.style.left = `${e.pageX + 10}px`;
-    tooltip.value.style.top = `${e.pageY + 10}px`;
-    tooltip.value.style.visibility = 'visible'; // Подсказка видима в DOM
-    tooltip.value.style.color = 'transparent'; // Делаем цвет текста прозрачным
-    tooltip.value.style.backgroundColor = 'transparent'; // Делаем фон прозрачным
-  }
-
-  // Запускаем таймер, чтобы сделать подсказку видимой через 700мс без движения
-  timer = setTimeout(() => {
+    // Устанавливаем позицию подсказки сразу
     if (tooltip.value) {
-      tooltip.value.style.color = ''; // Сбрасываем цвет текста на стандартный
-      tooltip.value.style.backgroundColor = ''; // Сбрасываем фон на стандартный
+      tooltip.value.style.left = `${e.pageX + 10}px`;
+      tooltip.value.style.top = `${e.pageY + 10}px`;
+      tooltip.value.style.visibility = 'visible'; // Подсказка видима в DOM
+      tooltip.value.style.color = 'transparent'; // Делаем цвет текста прозрачным
+      tooltip.value.style.backgroundColor = 'transparent'; // Делаем фон прозрачным
     }
-  }, timeout);
+
+    // Запускаем таймер, чтобы сделать подсказку видимой через 700мс без движения
+    timer = setTimeout(() => {
+      if (tooltip.value) {
+        tooltip.value.style.color = ''; // Сбрасываем цвет текста на стандартный
+        tooltip.value.style.backgroundColor = ''; // Сбрасываем фон на стандартный
+      }
+    }, timeout);
+  }
 };
 
 const hideTooltip = () => {
@@ -258,7 +259,7 @@ const hideTooltip = () => {
   }
 };
 
-const moveTooltip = (e) => {
+const moveTooltip = (e: MouseEvent) => {
   if (tooltip.value) {
     // Обновляем позицию подсказки
     tooltip.value.style.left = `${e.pageX + 10}px`;
@@ -281,31 +282,40 @@ const moveTooltip = (e) => {
   }
 };
 
-// Обработчики жизненного цикла для добавления/удаления слушателей событий
+
 onMounted(async () => {
   await nextTick(); // Убедимся, что элементы существуют в DOM
 
   const input = document.querySelector("#phoneNumber");
 
-  iti.value = intlTelInput(input, {
-    loadUtilsOnInit: `https://cdn.jsdelivr.net/npm/intl-tel-input@${intlTelInput.version}/build/js/utils.js`,
-  });
+
+  if (input && input instanceof HTMLInputElement) {
+    iti.value = intlTelInput(input, {
+      loadUtilsOnInit: `https://cdn.jsdelivr.net/npm/intl-tel-input@${intlTelInput.version}/build/js/utils.js`,
+    });
+  } else {
+    console.error("Input element not found or not valid");
+  }
 
 
   const inputs = document.querySelectorAll('input[data-ref^="inputTracking"]')
   inputs.forEach(input => {
-    input.addEventListener('mouseenter', showTooltip);
-    input.addEventListener('mouseleave', hideTooltip);
-    input.addEventListener('mousemove', moveTooltip);
+    if (input instanceof HTMLInputElement) {
+      input.addEventListener('mouseenter', showTooltip);
+      input.addEventListener('mouseleave', hideTooltip);
+      input.addEventListener('mousemove', moveTooltip);
+    }
   })
 });
 
 onUnmounted(() => {
   const inputs = document.querySelectorAll('input[data-ref^="inputTracking"]')
   inputs.forEach(input => {
-    input.addEventListener('mouseenter', showTooltip);
-    input.addEventListener('mouseleave', hideTooltip);
-    input.addEventListener('mousemove', moveTooltip);
+    if (input instanceof HTMLInputElement) {
+      input.addEventListener('mouseenter', showTooltip);
+      input.addEventListener('mouseleave', hideTooltip);
+      input.addEventListener('mousemove', moveTooltip);
+    }
   })
 
 });
@@ -462,29 +472,29 @@ onUnmounted(() => {
 
 <style scoped>
 
-::v-deep .iti__dropdown-content {
+::v-deep(.iti__dropdown-content) {
   background-color: var(--color-background-accent);
 }
-::v-deep .iti__search-input {
+::v-deep(.iti__search-input) {
   background-color: var(--color-background-base);
   color: var(--color-light);
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
 }
-::v-deep .iti__country.iti__highlight {
+::v-deep(.iti__country.iti__highlight) {
   background-color: var(--color-red);
 }
-::v-deep .iti__country-list {
+::v-deep(.iti__country-list) {
   color: var(--color-light);
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
 }
 
-::v-deep .iti__dial-code {
+::v-deep(.iti__dial-code) {
   color: var(--color-light);
 }
 
-::v-deep iti__flag {
+::v-deep(iti__flag) {
   color: var(--color-light);
 }
 
@@ -518,7 +528,7 @@ onUnmounted(() => {
 }
 
 .subtitle {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 18px;
   color: var(--color-light);
   margin-top: 12px;
@@ -567,14 +577,14 @@ onUnmounted(() => {
 .counter-body {
   width: 185px;
   display: flex;
-  font-family: var(--erbaum-book);
+  font-family: var(--erbaum-book), sans-serif;
   font-size: 18px;
   color: var(--color-light);
   font-weight: 300;
 }
 
 .counter-text {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 16px;
 }
 
@@ -617,7 +627,7 @@ onUnmounted(() => {
   background-color: var(--color-background-accent);
 }
 
-::v-deep .el-input {
+::v-deep(.el-input) {
   --el-input-height: var(--element-height);
   --el-input-border-radius: 20px;
   --el-input-placeholder-color: var(--color-medium);
@@ -627,19 +637,19 @@ onUnmounted(() => {
   --el-input-text-color: var(--color-light);
 }
 
-::v-deep .el-input__wrapper {
+::v-deep(.el-input__wrapper) {
   box-shadow: none;
   padding-inline: 16px;
   padding-block: 0;
 }
 
-::v-deep .el-input__wrapper:hover,
-::v-deep .el-input__wrapper:focus-within {
+::v-deep(.el-input__wrapper:hover),
+::v-deep(.el-input__wrapper:focus-within) {
   border: 1px solid var(--color-light);
 }
 
-::v-deep .el-input__inner {
-  font-family: var(--roboto-light);
+::v-deep(.el-input__inner) {
+  font-family: var(--roboto-light), sans-serif;
   font-size: 16px;
   font-weight: 300;
 }
@@ -663,13 +673,13 @@ onUnmounted(() => {
 }
 
 .checkbox-text {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   font-size: 16px;
 }
 
 .checkbox-number {
-  font-family: var(--roboto-light);
+  font-family: var(--roboto-light), sans-serif;
   font-weight: 300;
   font-size: 16px;
 }
@@ -701,7 +711,7 @@ onUnmounted(() => {
   min-height: 112px; /* Минимальная высота */
   background-color: var(--color-background-accent); /* Цвет фона */
   border-radius: var(--input-radius);
-  font-family: var(--roboto-regular);
+  font-family: var(--roboto-regular), sans-serif;
   font-size: 16px;
   padding: 20px 16px;
   resize: vertical;
@@ -714,16 +724,16 @@ onUnmounted(() => {
   border: 1px solid var(--color-light);
 }
 
-/* Стили для плейсхолдера */
+
 .custom-textarea::placeholder {
-  color: var(--color-medium); /* Цвет плейсхолдера, если необходимо */
-  font-family: var(--roboto-light); /* Шрифт плейсхолдера */
-  font-size: 16px; /* Размер шрифта для плейсхолдера */
+  color: var(--color-medium);
+  font-family: var(--roboto-light), sans-serif;
+  font-size: 16px;
   font-weight: 300;
 }
 
 .copyright-text {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 12px;
   color: var(--color-medium);
   cursor: default;
@@ -754,8 +764,10 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+input[type="number"] {
+  -moz-appearance: textfield; /* Для Firefox */
+  -webkit-appearance: none;   /* Для Webkit браузеров (Chrome, Safari) */
+  appearance: none;           /* Для других современных браузеров */
 }
 
 .error-container {
@@ -766,7 +778,7 @@ input[type=number] {
 
 .error-message {
   height: 20px;
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #FF5269;
@@ -785,15 +797,15 @@ input[type=number] {
   width: 50%;
 }
 
-::v-deep .el-input.hasError .el-input__wrapper {
+::v-deep(.el-input.hasError .el-input__wrapper) {
   border: 1px solid var(--color-red);
 }
 
-::v-deep .el-input.hasError .el-input__wrapper:focus-within {
+::v-deep(.el-input.hasError .el-input__wrapper:focus-within) {
   border: 1px solid var(--color-light);
 }
 
-::v-deep .el-input.hasError .el-input__wrapper:hover {
+::v-deep(.el-input.hasError .el-input__wrapper:hover) {
   border: 1px solid var(--color-light);
 }
 
@@ -804,14 +816,14 @@ input[type=number] {
 .submit-button::after {
   content: "";
   position: absolute;
-  top: 0%;
+  top: 0;
   left: 170%;
   background: url("@/assets/icons/stickers/form-sticker.svg") center/contain no-repeat;
   width: 252px;
   height: 133px;
 }
 
-::v-deep .el-dialog {
+::v-deep(.el-dialog) {
   background-color: var(--color-background-accent);
   text-align: center;
   width: 891px;
@@ -826,12 +838,12 @@ input[type=number] {
   margin: 0;
 }
 
-::v-deep .el-dialog header {
+::v-deep(.el-dialog header) {
   width: 1px;
   padding-right: 0;
 }
 
-::v-deep .el-dialog__body {
+::v-deep(.el-dialog__body) {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -839,14 +851,14 @@ input[type=number] {
 }
 
 .dialog-title {
-  font-family: var(--erbaum-medium);
+  font-family: var(--erbaum-medium), sans-serif;
   font-weight: 500;
   font-size: 42px;
   text-transform: uppercase;
 }
 
 .dialog-subtitle {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   font-size: 18px;
   color: var(--color-light);
@@ -865,7 +877,7 @@ input[type=number] {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   padding: 0 10px;
 }
@@ -894,7 +906,7 @@ input[type=number] {
     height: 702px;
     margin-top: 20px;
   }
-  ::v-deep .iti {
+  ::v-deep(.iti) {
     width: 100%;
   }
   .datepicker-container {
@@ -922,7 +934,7 @@ input[type=number] {
 }
 
 @media (max-width: 1920px) and (min-width: 320px) {
-  ::v-deep .el-dialog {
+  ::v-deep(.el-dialog) {
     width: calc(300px + (891 - 300) * ((100vw - 320px) / (1920 - 320)));
     height: calc(240px + (298 - 240) * ((100vw - 320px) / (1920 - 320)));
   }
@@ -968,7 +980,7 @@ input[type=number] {
     font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (768 - 320)));
   }
 
-  ::v-deep el-input-inner::placeholder {
+  ::v-deep(.el-input-inner::placeholder) {
     font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (768 - 320)));
   }
 
@@ -1031,7 +1043,7 @@ input[type=number] {
     display: flex;
     justify-content: flex-end;
   }
-  ::v-deep .el-date-editor.el-input, .el-date-editor.el-input__wrapper {
+  ::v-deep(.el-date-editor.el-input, .el-date-editor.el-input__wrapper) {
     --el-date-editor-width: 100%;
   }
   .date-and-counter {

@@ -63,7 +63,7 @@
 }
 
 .subtitle {
-  font-family: var(--erbaum-book);
+  font-family: var(--erbaum-book), sans-serif;
   font-weight: 300;
   font-size: 40px;
   line-height: 110%;
@@ -74,7 +74,7 @@
 
 .title,
 .red {
-  font-family: var(--erbaum-medium);
+  font-family: var(--erbaum-medium), sans-serif;
   font-weight: 400;
   font-size: 400px;
   line-height: 110%;

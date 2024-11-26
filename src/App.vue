@@ -8,7 +8,6 @@ import FaqSection from '@/vues/06-FaqSection.vue';
 import ReviewSection from '@/vues/07-ReviewSection.vue';
 import FormSection from '@/vues/08-FormSection.vue';
 import Footer from '@/vues/09-Footer.vue';
-import NotFound from '@/vues/NotFound.vue';
 
 import { ref, onMounted, onUnmounted, provide } from 'vue';
 
@@ -20,7 +19,7 @@ const handleScroll = () => {
 };
 
 // Логика обработки ширины окна
-const windowWidth = ref(window.innerWidth);
+const windowWidth = ref<number>(window.innerWidth);
 
 const updateWindowWidth = () => {
   windowWidth.value = window.innerWidth;
@@ -34,9 +33,9 @@ const initializeIntersectionObserver = () => {
           const sectionNames = entry.target.querySelectorAll('.section-name');
           sectionNames.forEach((sectionName) => {
             if (entry.isIntersecting) {
-              sectionName.style.color = 'var(--color-light)';
+              (sectionName as HTMLElement).style.color = 'var(--color-light)';
             } else {
-              sectionName.style.color = 'var(--color-light-title)';
+              (sectionName as HTMLElement).style.color = 'var(--color-light-title)';
             }
           });
         });

@@ -21,7 +21,7 @@ function playVideo() {
     isLoading.value = false // Сбрасываем isLoading в false через 2 секунды
   }, 1500)
   // Получаем iframe элемента
-  const iframe = document.querySelector('.video-container iframe')
+  const iframe = document.querySelector('.video-container iframe') as HTMLIFrameElement;
 
   // Проверяем, существует ли iframe
   if (iframe) {
@@ -89,7 +89,6 @@ function playVideo() {
           <iframe
             src="https://www.youtube.com/embed/wjm42PHnNMs?si=fsCtloQRXT2meuqz"
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
@@ -101,7 +100,7 @@ function playVideo() {
 </template>
 
 <style scoped>
-::v-deep .el-loading-mask {
+::v-deep(.el-loading-mask) {
   background-color: var(--color-background-accent);
   border-radius: var(--element-radius);
   transition: opacity 0.1s;
@@ -109,7 +108,7 @@ function playVideo() {
 .container {
   margin-bottom: 40px;
 }
-::v-deep .el-loading-text {
+::v-deep(.el-loading-text) {
   color: var(--color-red);
   font-size: 20px;
 }
@@ -134,10 +133,6 @@ function playVideo() {
   z-index: 10;
 }
 
-.about-section-title-container {
- /*margin-top: 200px;*/
-}
-
 .about-section-content {
   height: 556px;
   position: relative;
@@ -156,7 +151,7 @@ function playVideo() {
 }
 
 .description {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 16px;
   color: var(--color-light);
   cursor: default;
@@ -226,7 +221,7 @@ function playVideo() {
 }
 
 .description-item-title {
-  font-family: var(--erbaum-medium);
+  font-family: var(--erbaum-medium), sans-serif;
   font-weight: 500;
   font-size: 42px;
   color: var(--color-light);
@@ -237,7 +232,7 @@ function playVideo() {
 .description-item-subtitle {
   width: 212px;
   height: 54px;
-  font-family: var(--raleway-semibold);
+  font-family: var(--raleway-semibold), sans-serif;
   font-weight: 600;
   font-size: 18px;
   color: var(--color-light);
@@ -303,7 +298,7 @@ function playVideo() {
   .video-container iframe {
     border-radius: var(--element-radius-mobile);
   }
-  ::v-deep .el-loading-mask {
+  ::v-deep(.el-loading-mask) {
     border-radius: var(--element-radius-mobile);
   }
   .description-item {

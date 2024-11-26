@@ -30,7 +30,7 @@ const slidesData = ref({
 });
 
 // Функция для предзагрузки изображения
-const preloadImage = (src) => {
+const preloadImage = (src: string) => {
   return new Promise((resolve) => {
     const img = new Image();
     img.src = src;
@@ -72,11 +72,11 @@ const goToLeft = () => {
 // Логика для обработки свайпов
 let touchStartX = 0;
 
-const onTouchStart = (event) => {
+const onTouchStart = (event: TouchEvent) => {
   touchStartX = event.touches[0].clientX;
 };
 
-const onTouchEnd = (event) => {
+const onTouchEnd = (event: TouchEvent) => {
   const touchEndX = event.changedTouches[0].clientX;
   const swipeDistance = touchEndX - touchStartX;
 
@@ -107,7 +107,7 @@ const onTouchEnd = (event) => {
             <div class="left-slide">
               <img
                   :src="slidesData.leftSlide"
-                  :key="leftIndex.value"
+                  :key="leftIndex"
                   alt=""
                   loading="lazy"
               />
@@ -115,7 +115,7 @@ const onTouchEnd = (event) => {
             <div class="front-slide">
               <img
                   :src="slidesData.frontSlide"
-                  :key="frontIndex.value"
+                  :key="frontIndex"
                   alt=""
                   loading="lazy"
               />
@@ -123,7 +123,7 @@ const onTouchEnd = (event) => {
             <div class="right-slide">
               <img
                   :src="slidesData.rightSlide"
-                  :key="rightIndex.value"
+                  :key="rightIndex"
                   alt=""
                   loading="lazy"
               />
@@ -164,9 +164,6 @@ const onTouchEnd = (event) => {
 .slider {
   width: 100%;
   max-width: 1920px;
-}
-
-.slider-container {
 }
 
 .slides-container {

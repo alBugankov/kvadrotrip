@@ -192,7 +192,7 @@
 .card-text-describe {
   text-align: center;
   width: 100%;
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 16px;
   color: var(--color-light);
   cursor: default;
@@ -204,7 +204,7 @@
 .card-text-coast {
   text-align: center;
   width: 100%;
-  font-family: var(--erbaum-medium);
+  font-family: var(--erbaum-medium), sans-serif;
   font-weight: 500;
   font-size: 42px;
   color: var(--color-light);

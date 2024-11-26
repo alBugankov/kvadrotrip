@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, inject } from 'vue';
+import type { Ref } from 'vue';
 
 const navbarStyle = ref({
   backgroundColor: 'transparent',
   transition: 'background-color 0.2s linear'
 });
 
-const windowWidth = inject('windowWidth');
+const windowWidth = inject('windowWidth',ref(0)) as Ref<number>;
 const isMenuOpen = ref(false)
 
 

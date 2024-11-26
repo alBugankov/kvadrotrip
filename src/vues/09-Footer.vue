@@ -37,14 +37,17 @@ const scrollToTop = () => {
                 <img
                     src="../assets/icons/contacts/Location.svg"
                     width="24" height="24"
-                    loading="lazy" />
+                    loading="lazy"
+                    alt="Иконка локации"
+                />
                 <p class="location">Нячанг</p>
               </div>
               <div class="contacts-location contacts-item">
                 <img
                     src="../assets/icons/contacts/Time.svg"
                     width="24" height="24"
-                    loading="lazy" />
+                    loading="lazy"
+                    alt="Иконка часов"/>
                 <p class="location">Вс-выходной</p>
               </div>
             </div>
@@ -174,7 +177,7 @@ const scrollToTop = () => {
 .contacts-item {
   display: flex;
   align-items: center;
-  font-family: var(--erbaum-book);
+  font-family: var(--erbaum-book), sans-serif;
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 300;
@@ -242,7 +245,7 @@ const scrollToTop = () => {
 }
 
 .copyright-container {
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-size: 12px;
   color: var(--color-medium);
   display: flex;
@@ -259,7 +262,7 @@ const scrollToTop = () => {
 }
 
 .design-link {
-  font-family: var(--raleway-medium);
+  font-family: var(--raleway-medium), sans-serif;
   font-weight: 400;
   font-size: 16px;
   margin-left: auto;

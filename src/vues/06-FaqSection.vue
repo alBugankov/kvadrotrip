@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { inject } from 'vue';
+import type { Ref } from 'vue';
 
-const windowWidth = inject('windowWidth'); // Инжектируем из App.vue
+const windowWidth = inject('windowWidth') as Ref<number>;
 
 </script>
 
@@ -113,19 +114,19 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
   left: -35%;
   z-index: -1;
 }
-::v-deep .el-collapse-item__content {
+::v-deep(.el-collapse-item__content) {
   background-color: var(--color-red);
 }
-::v-deep .el-collapse-item__header {
+::v-deep(.el-collapse-item__header) {
   height: 72px;
   background-color: var(--color-red);
 }
 
-::v-deep .el-collapse-item__header .collapse-icon {
+::v-deep(.el-collapse-item__header .collapse-icon) {
   transition: transform var(--transition-duration) ease;
 }
 
-::v-deep .el-collapse-item.is-active .collapse-icon {
+::v-deep(.el-collapse-item.is-active .collapse-icon) {
   transform: rotate(-45deg);
 }
 
@@ -134,7 +135,7 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
   width: 100%;
   display: flex;
   align-items: center;
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   font-size: 18px;
   color: var(--color-light);
@@ -143,7 +144,7 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
 }
 .item-answer {
   background-color: var(--color-red);
-  font-family: var(--raleway-regular);
+  font-family: var(--raleway-regular), sans-serif;
   font-weight: 400;
   font-size: 18px;
   color: var(--color-light);
@@ -198,7 +199,7 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
     font-size: calc(11px + (18 - 11) * ((100vw - 320px) / (768 - 320)));
   }
 
-  ::v-deep .el-collapse-item__header {
+  ::v-deep(.el-collapse-item__header) {
     height: calc(44px + (72 - 44) * ((100vw - 320px) / (768 - 320)));
   }
   .item-question {
@@ -207,7 +208,7 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
   .accordion-container {
     padding-inline: calc(10px + (30 - 10) * ((100vw - 320px) / (768 - 320)));
   }
-  ::v-deep .el-collapse-item {
+  ::v-deep(.el-collapse-item) {
     margin-bottom: calc(8px + (20 - 8) * ((100vw - 320px) / (768 - 320)));
   }
   .collapse-icon {
