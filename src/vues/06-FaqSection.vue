@@ -166,6 +166,10 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
   opacity: 0.5;
 }
 
+.item-question.is-active {
+  opacity: 1;
+}
+
 .el-collapse {
   border: none; /* Верхняя дефолтная границы всего el-collapse */
   --el-collapse-border-color: var(--color-red);
@@ -213,7 +217,8 @@ const windowWidth = inject('windowWidth'); // Инжектируем из App.vu
 
 @media (max-width: 768px) and (hover: none) {
 
-  .item-question:hover {
+  .item-question:hover,
+  .item-question:active {
     opacity: 1;
   }
 }

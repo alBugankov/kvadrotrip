@@ -192,7 +192,7 @@ const submitForm = () => {
           dialogTitle.value = 'Проблема с соединением';
           dialogSubtitle.value = 'Пожалуйста, повторите попытку';
           titleStyle.value = {
-            color: 'var(--color-red)'
+            color: 'var(--color-red)',
           }
         }
       })
@@ -202,7 +202,7 @@ const submitForm = () => {
         dialogTitle.value = 'Проблема с соединением';
         dialogSubtitle.value = 'Пожалуйста, повторите попытку';
         titleStyle.value = {
-          color: 'var(--color-red)'
+          color: 'var(--color-red)',
         }
       })
       .finally(() => {
@@ -814,17 +814,21 @@ input[type=number] {
 ::v-deep .el-dialog {
   background-color: var(--color-background-accent);
   text-align: center;
-  width: 46.35vw;
-  min-width: 450px;
-  min-height: 280px;
+  width: 891px;
+  height: 298px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48.5%;
   transform: translate(-50%, -50%);
   margin: 0;
+}
+
+::v-deep .el-dialog header {
+  width: 1px;
+  padding-right: 0;
 }
 
 ::v-deep .el-dialog__body {
@@ -838,6 +842,7 @@ input[type=number] {
   font-family: var(--erbaum-medium);
   font-weight: 500;
   font-size: 42px;
+  text-transform: uppercase;
 }
 
 .dialog-subtitle {
@@ -913,6 +918,19 @@ input[type=number] {
   }
   .datepicker-error-container {
     width: 265px;
+  }
+}
+
+@media (max-width: 1920px) and (min-width: 320px) {
+  ::v-deep .el-dialog {
+    width: calc(300px + (891 - 300) * ((100vw - 320px) / (1920 - 320)));
+    height: calc(240px + (298 - 240) * ((100vw - 320px) / (1920 - 320)));
+  }
+  .dialog-title {
+    font-size: calc(19px + (42 - 19) * ((100vw - 320px) / (1920 - 320)));
+  }
+  .dialog-subtitle {
+    font-size: calc(13px + (18 - 13) * ((100vw - 320px) / (1920 - 320)));
   }
 }
 
